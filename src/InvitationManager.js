@@ -130,7 +130,7 @@ function imSetup() {
 			var lastDateIMShown = new Date(parseInt(getCookie('lastDateIMShown')));
 			// If storage delay is expired, remove 'lastDateIMShown' from cookie and localstorage
 			if (isStorageExpired(lastDateIMShown)) {
-				document.cookie = "lastDateIMShown=;expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure;domain=" + removeSubdomain(window.location.href.toLowerCase()) + ";path=/";
+				document.cookie = "lastDateIMShown=;expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure;domain=www." + removeSubdomain(window.location.href.toLowerCase()) + ";path=/";
 				localStorage.removeItem( "lastDateIMShown" );
 			}
 			else{
@@ -825,6 +825,6 @@ function imSetup() {
 	 */
 	function setCookie(cName,cValue,cExpDate,cDomain){
 		document.cookie = cName +"=" + cValue + ";expires=" + cExpDate 
-				+ ";domain=" + cDomain + ";Secure;path=/";
+				+ ";domain=www." + cDomain + ";Secure;path=/";
 	}
 }
