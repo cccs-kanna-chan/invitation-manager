@@ -95,9 +95,9 @@ function imSetup() {
 				 */
 				if(localStorage.getItem('lastDateIMShown')){
 					var cookieName = 'lastDateIMShown',
-					maxNbDaysIMPersist = new Date(localStorage.getItem('lastDateIMShown'));
+					maxNbDaysIMPersist = new Date(parseInt(localStorage.getItem('lastDateIMShown')));
 					maxNbDaysIMPersist.setDate(maxNbDaysIMPersist.getDate() + surveyDB.settings["duration-delay"]);
-					setCookie(cookieName,localStorage.getItem('lastDateIMShown'),maxNbDaysIMPersist, removeSubdomain(window.location.href.toLowerCase()));
+					setCookie(cookieName,localStorage.getItem('lastDateIMShown'),maxNbDaysIMPersist.getTime(), removeSubdomain(window.location.href.toLowerCase()));
 				}else{
 					mainPart2();
 				}
@@ -111,7 +111,7 @@ function imSetup() {
 			/* If shown survey was served from another server, make sure the localstorage item 'lastDateIMShown' is set
 			 * with the value from 'lastDateIMShown' cookie.
 			 */			
-			localStorage.setItem('lastDateIMShown', new Date(getCookie('lastDateIMShown')));
+			localStorage.setItem('lastDateIMShown', new Date(parseInt(getCookie('lastDateIMShown'))));
 			
 		}
 	}
@@ -127,7 +127,7 @@ function imSetup() {
 			return;
 		
 		if (getCookie('lastDateIMShown')) {
-			var	lastDateIMShown = new Date(getCookie('lastDateIMShown'));
+			var lastDateIMShown = new Date(parseInt(getCookie('lastDateIMShown')));
 			// If storage delay is expired, remove 'lastDateIMShown' from cookie and localstorage
 			if (isStorageExpired(lastDateIMShown)) {
 				document.cookie = "lastDateIMShown=;expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure;domain=" + removeSubdomain(window.location.href.toLowerCase()) + ";path=/";
@@ -256,9 +256,9 @@ function imSetup() {
 				lastDateIMShown = new Date();
 				maxNbDaysIMPersist.setDate(maxNbDaysIMPersist.getDate() + surveyDB.settings["duration-delay"]);
 				//set the date visitor was invited in localstorage
-				localStorage.setItem('lastDateIMShown', lastDateIMShown);	
+				localStorage.setItem('lastDateIMShown', lastDateIMShown.getTime());
 				
-				setCookie(cookieName,lastDateIMShown,maxNbDaysIMPersist, removeSubdomain(window.location.href.toLowerCase()))
+				setCookie(cookieName,lastDateIMShown.getTime(),maxNbDaysIMPersist.getTime(), removeSubdomain(window.location.href.toLowerCase()))
 			}
 		}
 		else {
